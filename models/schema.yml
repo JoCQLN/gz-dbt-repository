@@ -9,17 +9,13 @@ sources:
 
 # TABLES SALES
       - name: sales
-        test:
-          - unique:
-               column_name: "(orders_id ||'-' || products_id)"
-          - not_null:
-               column_name: "(orders_id || '-' || products_id)"
+        
         identifier: raw_gz_sales
         description: sales of Greenweez / we have on row per product_id found in each orders_id
-        Columns:
-          #PRIMARY KEY TESTING
+        columns:
           - name: date_
             description: date of purchase
+          #PRIMARY KEY TESTING
           - name: orders_id
             description: identification number of the command
           - name: products_id
@@ -28,18 +24,24 @@ sources:
             description: income generated PER product present in a command/order
           - name: quantity
             description: total number of products in a command/order
+        tests:
+          - unique:
+               column_name: "(orders_id ||'-' || pdt_id)"
+          - not_null:
+               column_name: "(orders_id ||'-' || pdt_id)"
+
 
 # TABLE PRODUCT
       - name: product
         identifier: raw_gz_product
         description: Each products sold by Greenwez / we have every unique products ID and their individual cost to purchase
-        Columns:
+        columns:
           #PRIMARY KEY TESTING
           - name: products_id
             description: identification number of the products in the command/order
-            test: 
+            tests: 
               - unique
-              - not null
+              - not_null
           - name: purchase_cost
             description: cost of the products as Greenweez buy it
 
@@ -47,9 +49,12 @@ sources:
       - name: ship
         identifier: raw_gz_ship
         description: shipping tab of every orders/ we have on row the cost and fee's from shiping by order made
-        Columns:
+        columns:
           - name: orders_id
             description: identification number of the command being shipped
+            tests:
+              - unique
+              - not_null
           - name: shipping_fee
             description: shipping fee of the order
           - name: log_cost
