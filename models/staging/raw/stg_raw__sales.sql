@@ -2,16 +2,16 @@ with
 
 source as (
 
-    select * from {{ source('gz', 'sales') }}
+    select * from {{ source('raw', 'sales') }}
 
 ),
 
 renamed as (
 
     select
-        date_date,
+        (date_date)as date_,
         orders_id,
-        pdt_id,
+        (pdt_id)as products_id,
         revenue,
         quantity
 
