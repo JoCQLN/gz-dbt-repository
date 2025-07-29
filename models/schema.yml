@@ -18,6 +18,8 @@ sources:
           #PRIMARY KEY TESTING
           - name: orders_id
             description: identification number of the command
+            tests:
+              - not_null
           - name: products_id
             description: identification number of the products in the command/order
           - name: revenue
