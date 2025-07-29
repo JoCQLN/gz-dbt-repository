@@ -1,13 +1,58 @@
 version: 2
 
+# DATASET name
 sources:
   - name: raw
     schema: gz_raw_data
     tables:
+
+
+# TABLES SALES
       - name: sales
+        test:
+          - unique:
+               column_name: "(orders_id ||'-' || products_id)"
+          - not_null:
+               column_name: "(orders_id || '-' || products_id)"
         identifier: raw_gz_sales
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        Columns:
+          #PRIMARY KEY TESTING
+          - name: date_
+            description: date of purchase
+          - name: orders_id
+            description: identification number of the command
+          - name: products_id
+            description: identification number of the products in the command/order
+          - name: revenue
+            description: income generated PER product present in a command/order
+          - name: quantity
+            description: total number of products in a command/order
+
+# TABLE PRODUCT
       - name: product
         identifier: raw_gz_product
+        description: Each products sold by Greenwez / we have every unique products ID and their individual cost to purchase
+        Columns:
+          #PRIMARY KEY TESTING
+          - name: products_id
+            description: identification number of the products in the command/order
+            test: 
+              - unique
+              - not null
+          - name: purchase_cost
+            description: cost of the products as Greenweez buy it
+
+# TABLE SHIP
       - name: ship
         identifier: raw_gz_ship
-    
+        description: shipping tab of every orders/ we have on row the cost and fee's from shiping by order made
+        Columns:
+          - name: orders_id
+            description: identification number of the command being shipped
+          - name: shipping_fee
+            description: shipping fee of the order
+          - name: log_cost
+            description: logistical cost of the order
+          - name: ship_cost
+            description: shipping cost of the order
