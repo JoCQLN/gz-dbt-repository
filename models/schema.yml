@@ -9,9 +9,11 @@ sources:
 
 # TABLES SALES
       - name: sales
-        
         identifier: raw_gz_sales
         description: sales of Greenweez / we have on row per product_id found in each orders_id
+        freshness:
+         warn_after: { count: 90, period: day}
+        loaded_at_field: "CAST(date_date AS DATETIME)"
         columns:
           - name: date_
             description: date of purchase
@@ -20,7 +22,9 @@ sources:
             description: identification number of the command
             tests:
               - not_null
-          - name: products_id
+          - name: pdt_id
+            tests:
+              - not_null
             description: identification number of the products in the command/order
           - name: revenue
             description: income generated PER product present in a command/order
