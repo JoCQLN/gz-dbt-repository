@@ -15,7 +15,7 @@ sources:
          warn_after: { count: 90, period: day}
         loaded_at_field: "CAST(date_date AS DATETIME)"
         columns:
-          - name: date_
+          - name: date_date
             description: date of purchase
           #PRIMARY KEY TESTING
           - name: orders_id
@@ -144,6 +144,7 @@ sources:
         description: campaign tab containing all the criteo campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
         
         columns: 
+
           - name: date_date
             description: date the campaign released
             tests:
