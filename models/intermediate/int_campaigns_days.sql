@@ -1,11 +1,8 @@
-SELECT *
-FROM {{ref('stg_raw__adwords')}}
-UNION ALL
-SELECT *
-FROM {{ref('stg_raw__bing')}}
-UNION ALL
-SELECT *
-FROM {{ref('stg_raw__criteo')}}
-UNION ALL
-SELECT *
-FROM {{ref('stg_raw__facebook')}}
+SELECT
+ date_date,
+ ROUND(SUM(ads_cost),2) as ads_cost,
+ ROUND(SUM(impression),2) as impression,
+ ROUND(SUM(click),2) as click, 
+ FROM {{ref("int_campaigns")}} camp
+ Group by date_date
+ order by date_date DESC
