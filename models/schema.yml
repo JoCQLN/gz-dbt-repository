@@ -68,11 +68,11 @@ sources:
           - name: ship_cost
             description: shipping cost of the order
 
-# TABLE ADWORDS
+# TABLE facebook
     
-      - name: adwords
-        identifier: raw_gz_adwords
-        description: campaign tab containing all the adwords campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
+      - name: facebook
+        identifier: raw_gz_criteo
+        description: campaign tab containing all the facebook campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
         
         columns: 
           - name: date_date
@@ -84,7 +84,7 @@ sources:
             description: which plateform the purchase have been made for the campaign key
 
           - name: campaign_key
-            description: unique identifier of a campaign (adwords)
+            description: unique identifier of a campaign (facebook)
 
           - name: camPGN_name
             description: campaign name containing details about country target/ type of ads/ general category of products promoted/ second category of specific products promoted
@@ -126,7 +126,65 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
-#TABLE CRITEO
+
+
+# TABLE criteo 
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: campaign tab containing all the criteo campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
+        
+        columns: 
+          - name: date_date
+            description: date the campaign released
+            tests:
+            - not_null
+
+          - name: paid_source
+            description: which plateform the purchase have been made for the campaign key
+
+          - name: campaign_key
+            description: unique identifier of a campaign (criteo)
+
+          - name: camPGN_name
+            description: campaign name containing details about country target/ type of ads/ general category of products promoted/ second category of specific products promoted
+         
+          - name: ads_cost
+            description: cost of the ads PER day
+         
+          - name: impression
+            description: number of people who viewed the ads/campaign
+         
+          - name: click
+            description: number of people who clicked on the ads
+            
+ #TABLE facebook
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: campaign tab containing all the facebook campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
+        
+        columns: 
+          - name: date_date
+            description: date the campaign released
+            tests:
+            - not_null
+
+          - name: paid_source
+            description: which plateform the purchase have been made for the campaign key
+
+          - name: campaign_key
+            description: unique identifier of a campaign (facebook)
+
+          - name: camPGN_name
+            description: campaign name containing details about country target/ type of ads/ general category of products promoted/ second category of specific products promoted
+         
+          - name: ads_cost
+            description: cost of the ads PER day
+         
+          - name: impression
+            description: number of people who viewed the ads/campaign
+         
+          - name: click
+            description: number of people who clicked on the ads
 
 
 #TABLE FACEBOOK
