@@ -2,7 +2,7 @@
  
  WITH orders_per_day AS (
    SELECT
-     date_
+     date_date
      ,COUNT(DISTINCT orders_id) AS nb_transactions
      ,ROUND(SUM(revenue),0) AS revenue
      ,ROUND(SUM(margin),0) AS margin
@@ -13,11 +13,11 @@
      ,ROUND(SUM(ship_cost),0) AS ship_cost
      ,SUM(quantity) AS quantity
  FROM {{ref("int_orders_operational")}}
- GROUP BY  date_
+ GROUP BY  date_date
  )
 
  SELECT
-     date_
+     date_date
      , revenue
      , margin
      , operational_margin
@@ -28,4 +28,4 @@
      , quantity
      , ROUND(revenue/NULLIF(nb_transactions, 0), 2) AS average_basket
  FROM orders_per_day
- ORDER BY  date_ DESC
+ ORDER BY  date_date DESC
