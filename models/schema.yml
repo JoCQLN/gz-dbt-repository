@@ -1,0 +1,69 @@
+version: 2
+
+# DATASET name
+sources:
+  - name: raw
+    schema: gz_raw_data
+    tables:
+
+
+# TABLES SALES
+      - name: sales
+        identifier: raw_gz_sales
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        freshness:
+         warn_after: { count: 90, period: day}
+        loaded_at_field: "CAST(date_date AS DATETIME)"
+        columns:
+          - name: date_
+            description: date of purchase
+          #PRIMARY KEY TESTING
+          - name: orders_id
+            description: identification number of the command
+            tests:
+              - not_null
+          - name: pdt_id
+            tests:
+              - not_null
+            description: identification number of the products in the command/order
+          - name: revenue
+            description: income generated PER product present in a command/order
+          - name: quantity
+            description: total number of products in a command/order
+        tests:
+          - unique:
+               column_name: "(orders_id ||'-' || pdt_id)"
+          - not_null:
+               column_name: "(orders_id ||'-' || pdt_id)"
+
+
+# TABLE PRODUCT
+      - name: product
+        identifier: raw_gz_product
+        description: Each products sold by Greenwez / we have every unique products ID and their individual cost to purchase
+        columns:
+          #PRIMARY KEY TESTING
+          - name: products_id
+            description: identification number of the products in the command/order
+            tests: 
+              - unique
+              - not_null
+          - name: purchase_cost
+            description: cost of the products as Greenweez buy it
+
+# TABLE SHIP
+      - name: ship
+        identifier: raw_gz_ship
+        description: shipping tab of every orders/ we have on row the cost and fee's from shiping by order made
+        columns:
+          - name: orders_id
+            description: identification number of the command being shipped
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: shipping fee of the order
+          - name: log_cost
+            description: logistical cost of the order
+          - name: ship_cost
+            description: shipping cost of the order
