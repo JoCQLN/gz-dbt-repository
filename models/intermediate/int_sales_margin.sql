@@ -1,6 +1,6 @@
 SELECT
       products_id,
-      date_,
+      date_date,
       orders_id,
       revenue,
       quantity,
