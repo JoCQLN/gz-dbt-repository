@@ -68,17 +68,15 @@ sources:
           - name: ship_cost
             description: shipping cost of the order
 
-# TABLE facebook
+# TABLE ADWORDS
     
       - name: adwords
         identifier: raw_gz_adwords
-        description: campaign tab containing all the facebook campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
+        description: campaign tab containing all the adwords campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
         
         columns: 
           - name: date_date
             description: date the campaign released
-            tests:
-            - not_null
 
           - name: paid_source
             description: which plateform the purchase have been made for the campaign key
@@ -97,6 +95,12 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
+#PRIMARY KEY
+        tests:
+          - unique:
+               column_name: "(campaign_key ||'-' || date_date)"
+          - not_null:
+               column_name: "(campaign_key ||'-' || date_date)"
             
  #TABLE BING
       - name: bing
@@ -126,6 +130,12 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
+#PRIMARY KEY
+        tests:
+          - unique:
+               column_name: "(campaign_key ||'-' || date_date)"
+          - not_null:
+               column_name: "(campaign_key ||'-' || date_date)"
 
 
 # TABLE criteo 
@@ -156,6 +166,12 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
+#PRIMARY KEY
+        tests:
+          - unique:
+               column_name: "(campaign_key ||'-' || date_date)"
+          - not_null:
+               column_name: "(campaign_key ||'-' || date_date)"
             
  #TABLE facebook
       - name: facebook
@@ -185,3 +201,9 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
+#PRIMARY KEY
+        tests:
+          - unique:
+               column_name: "(campaign_key ||'-' || date_date)"
+          - not_null:
+               column_name: "(campaign_key ||'-' || date_date)"
