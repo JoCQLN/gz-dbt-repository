@@ -97,3 +97,36 @@ sources:
          
           - name: click
             description: number of people who clicked on the ads
+            
+ #TABLE BING
+      - name: bing
+        identifier: raw_gz_bing
+        description: campaign tab containing all the BING campaign outcome / row contains date/id of campaign and their cost and results as impresions & click PER day
+        
+        columns: 
+          - name: date_date
+            description: date the campaign released
+            tests:
+            - not_null
+
+          - name: paid_source
+            description: which plateform the purchase have been made for the campaign key
+
+          - name: campaign_key
+            description: unique identifier of a campaign (bing)
+
+          - name: camPGN_name
+            description: campaign name containing details about country target/ type of ads/ general category of products promoted/ second category of specific products promoted
+         
+          - name: ads_cost
+            description: cost of the ads PER day
+         
+          - name: impression
+            description: number of people who viewed the ads/campaign
+         
+          - name: click
+            description: number of people who clicked on the ads
+#TABLE CRITEO
+
+
+#TABLE FACEBOOK
